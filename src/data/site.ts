@@ -1,4 +1,4 @@
-// Central business information for Anada Fashions.
+// Central business information for Ananda Fashions.
 // Update these values with the real business contact details.
 
 // WhatsApp number in international format, digits only (no +, spaces or dashes).
@@ -6,7 +6,7 @@
 export const WHATSAPP_NUMBER = "918148095782";
 
 export const SITE = {
-  name: "Anada Fashions",
+  name: "Ananda Fashions",
   tagline: "Elegant Designs Crafted with Perfection",
   specialities: "Custom Tailoring • Bridal Wear • Designer Blouses • Fashion Stitching",
   phoneDisplay: "+91 81480 95782",
@@ -22,7 +22,7 @@ export function whatsappLink(message?: string): string {
 
 /** Prefilled message for a specific design enquiry. */
 export function designEnquiryMessage(code: string): string {
-  return `Hello Anada Fashions,\n\nI am interested in Design ${code}.\n\nPlease share more details.`;
+  return `Hello Ananda Fashions,\n\nI am interested in Design ${code}.\n\nPlease share more details.`;
 }
 
-export const GENERAL_ENQUIRY = `Hello Anada Fashions,\n\nI would like to know more about your designs and tailoring services.`;
+export const GENERAL_ENQUIRY = `Hello Ananda Fashions,\n\nI would like to know more about your designs and tailoring services.`;

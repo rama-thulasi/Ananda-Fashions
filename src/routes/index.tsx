@@ -20,13 +20,13 @@ import showcaseImg from "@/assets/showcase.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Anada Fashions — Elegant Designs Crafted with Perfection" },
+      { title: "Ananda Fashions — Elegant Designs Crafted with Perfection" },
       {
         name: "description",
         content:
           "Premium tailoring studio for bridal wear, designer blouses, maggam & aari work. Browse our luxury design catalogue and connect on WhatsApp.",
       },
-      { property: "og:title", content: "Anada Fashions — Premium Tailoring Studio" },
+      { property: "og:title", content: "Ananda Fashions — Premium Tailoring Studio" },
       {
         property: "og:description",
         content: "Elegant Designs Crafted with Perfection. Custom tailoring & bridal couture.",
@@ -54,7 +54,7 @@ function HomePage() {
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
         <img
           src={heroImg}
-          alt="Anada Fashions bridal couture"
+          alt="Ananda Fashions bridal couture"
           className="absolute inset-0 h-full w-full object-cover object-center animate-zoom-in"
         />
         <div className="absolute inset-0 hero-overlay" />
@@ -62,7 +62,7 @@ function HomePage() {
           <div className="max-w-2xl">
             <p className="eyebrow animate-fade-up text-gold-soft">{SITE.specialities}</p>
             <h1 className="mt-5 animate-fade-up anim-delay-100 font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl md:text-7xl">
-              Anada Fashions
+              Ananda Fashions
             </h1>
             <p className="mt-5 animate-fade-up anim-delay-200 max-w-xl font-display text-2xl italic text-white/85 sm:text-3xl">
               {SITE.tagline}
@@ -149,7 +149,7 @@ function HomePage() {
       <section className="bg-background py-20 md:py-28">
         <div className="container-px">
           <SectionHeading
-            eyebrow="The Anada Promise"
+            eyebrow="The Ananda Promise"
             title="Why Choose Us"
             subtitle="A boutique experience built on trust, artistry and a perfect fit."
           />
@@ -181,7 +181,7 @@ function HomePage() {
             <div className="overflow-hidden rounded-2xl shadow-elegant">
               <img
                 src={showcaseImg}
-                alt="Anada Fashions tailoring studio"
+                alt="Ananda Fashions tailoring studio"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
@@ -199,7 +199,7 @@ function HomePage() {
               Discover Hundreds of Beautiful Designs
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-              From timeless bridal couture to everyday elegance, every Anada
+              From timeless bridal couture to everyday elegance, every Ananda
               Fashions creation is a celebration of artistry. Browse our gallery
               and find the design that tells your story.
             </p>

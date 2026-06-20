@@ -11,13 +11,13 @@ const HAND_3 = "/images/hand-design/Hand_3.png";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Anada Fashions" },
+      { title: "About Us — Ananda Fashions" },
       {
         name: "description",
         content:
-          "Discover the story behind Anada Fashions — a premium tailoring studio devoted to craftsmanship, custom stitching and elegant bridal couture.",
+          "Discover the story behind Ananda Fashions — a premium tailoring studio devoted to craftsmanship, custom stitching and elegant bridal couture.",
       },
-      { property: "og:title", content: "About Anada Fashions" },
+      { property: "og:title", content: "About Ananda Fashions" },
       {
         property: "og:description",
         content: "A premium tailoring studio devoted to craftsmanship and elegance.",
@@ -39,7 +39,7 @@ const SERVICES = [
 const SHOWCASE_IMAGES = [
   {
     src: FROCK_2,
-    alt: "Rose print frock design by Anada Fashions",
+    alt: "Rose print frock design by Ananda Fashions",
     className: "col-span-2 row-span-2",
   },
   {
@@ -71,7 +71,7 @@ function AboutPage() {
           <div className="my-6 gold-rule" />
           <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
             <p>
-              Anada Fashions began with a simple belief — that every garment
+              Ananda Fashions began with a simple belief — that every garment
               should be as unique as the person who wears it. Founded by
               <strong className="text-foreground"> Ananda Selvi G</strong>, what
               started as a small tailoring studio has grown into a trusted name
@@ -93,7 +93,7 @@ function AboutPage() {
           <div className="overflow-hidden rounded-2xl shadow-elegant">
             <img
               src={aboutImg}
-              alt="Artisan embroidering gold detailing at Anada Fashions"
+              alt="Artisan embroidering gold detailing at Ananda Fashions"
               loading="lazy"
               className="aspect-[4/5] w-full object-cover"
             />
@@ -161,7 +161,7 @@ function AboutPage() {
             A Commitment to Quality & Your Happiness
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            We envision Anada Fashions as more than a tailoring studio — a place
+            We envision Ananda Fashions as more than a tailoring studio — a place
             where craftsmanship meets care, where every customer feels heard, and
             where each design leaves you feeling beautiful. Our promise is simple:
             uncompromising quality and complete satisfaction, every single time.

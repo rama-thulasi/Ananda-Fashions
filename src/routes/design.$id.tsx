@@ -17,14 +17,14 @@ export const Route = createFileRoute("/design/$id")({
     return {
       meta: design
         ? [
-            { title: `${design.title} (${design.code}) — Anada Fashions` },
+            { title: `${design.title} (${design.code}) — Ananda Fashions` },
             { name: "description", content: design.description.slice(0, 155) },
-            { property: "og:title", content: `${design.title} — Anada Fashions` },
+            { property: "og:title", content: `${design.title} — Ananda Fashions` },
             { property: "og:description", content: design.description.slice(0, 155) },
             { property: "og:image", content: design.image },
             { name: "twitter:image", content: design.image },
           ]
-        : [{ title: "Design — Anada Fashions" }],
+        : [{ title: "Design — Ananda Fashions" }],
     };
   },
   component: DesignDetailPage,

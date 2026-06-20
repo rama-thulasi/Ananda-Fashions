@@ -26,13 +26,13 @@ export const Route = createFileRoute("/gallery")({
 },
   head: () => ({
     meta: [
-      { title: "Design Gallery — Anada Fashions" },
+      { title: "Design Gallery — Ananda Fashions" },
       {
         name: "description",
         content:
-          "Browse the full Anada Fashions catalogue — aari blouses, designer blouses, half sarees, pavadai sattai, frocks and hand designs.",
+          "Browse the full Ananda Fashions catalogue — aari blouses, designer blouses, half sarees, pavadai sattai, frocks and hand designs.",
       },
-      { property: "og:title", content: "Design Gallery — Anada Fashions" },
+      { property: "og:title", content: "Design Gallery — Ananda Fashions" },
       {
         property: "og:description",
         content: "Explore our complete collection of premium tailoring designs.",

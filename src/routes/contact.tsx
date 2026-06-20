@@ -7,13 +7,13 @@ import { btn, cls } from "@/components/ui-button";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Anada Fashions" },
+      { title: "Contact — Ananda Fashions" },
       {
         name: "description",
         content:
-          "Get in touch with Anada Fashions. Call, email or message us on WhatsApp for enquiries, custom stitching and appointments.",
+          "Get in touch with Ananda Fashions. Call, email or message us on WhatsApp for enquiries, custom stitching and appointments.",
       },
-      { property: "og:title", content: "Contact Anada Fashions" },
+      { property: "og:title", content: "Contact Ananda Fashions" },
       {
         property: "og:description",
         content: "Reach us by phone, email or WhatsApp for enquiries and appointments.",
@@ -42,7 +42,7 @@ function ContactPage() {
         <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border shadow-soft">
           <div className="bg-[var(--maroon-deep)] px-8 py-10 text-center">
             <h2 className="font-display text-3xl font-semibold text-white">
-              Anada<span className="text-gold"> Fashions</span>
+              Ananda<span className="text-gold"> Fashions</span>
             </h2>
             <p className="mt-2 text-sm text-white/70">{SITE.tagline}</p>
           </div>
@@ -82,7 +82,7 @@ function ContactPage() {
               Chat with us instantly
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-              The fastest way to reach Anada Fashions. Tap below to start a
+              The fastest way to reach Ananda Fashions. Tap below to start a
               conversation on WhatsApp.
             </p>
             <a

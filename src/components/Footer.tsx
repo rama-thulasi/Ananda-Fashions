@@ -16,7 +16,7 @@ export function Footer() {
       <div className="container-px grid gap-12 py-16 md:grid-cols-3 md:py-20">
         <div>
           <p className="font-display text-3xl font-semibold text-white">
-            Anada<span className="text-gold"> Fashions</span>
+            Ananda<span className="text-gold"> Fashions</span>
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
             {SITE.tagline}. A premium tailoring studio crafting bridal wear,
@@ -74,7 +74,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-px flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/55 sm:flex-row">
-          <p>© 2026 Anada Fashions. All rights reserved.</p>
+          <p>© 2026 Ananda Fashions. All rights reserved.</p>
           <p>Elegant Designs Crafted with Perfection</p>
         </div>
       </div>

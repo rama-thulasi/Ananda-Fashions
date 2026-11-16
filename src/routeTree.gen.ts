@@ -12,9 +12,16 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as DesignIdRouteImport } from './routes/design.$id'
+import { Route as AppFavouritesRouteImport } from './routes/app.favourites'
+import { Route as AppExploreRouteImport } from './routes/app.explore'
+import { Route as AppContactRouteImport } from './routes/app.contact'
+import { Route as AppAboutRouteImport } from './routes/app.about'
+import { Route as AppDesignIdRouteImport } from './routes/app.design.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -31,6 +38,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -41,19 +53,56 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
 const DesignIdRoute = DesignIdRouteImport.update({
   id: '/design/$id',
   path: '/design/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppFavouritesRoute = AppFavouritesRouteImport.update({
+  id: '/favourites',
+  path: '/favourites',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExploreRoute = AppExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppContactRoute = AppContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAboutRoute = AppAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDesignIdRoute = AppDesignIdRouteImport.update({
+  id: '/design/$id',
+  path: '/design/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/app': typeof AppRouteWithChildren
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/contact': typeof AppContactRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favourites': typeof AppFavouritesRoute
   '/design/$id': typeof DesignIdRoute
+  '/app/': typeof AppIndexRoute
+  '/app/design/$id': typeof AppDesignIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,41 +110,81 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/contact': typeof AppContactRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favourites': typeof AppFavouritesRoute
   '/design/$id': typeof DesignIdRoute
+  '/app': typeof AppIndexRoute
+  '/app/design/$id': typeof AppDesignIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/app': typeof AppRouteWithChildren
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/contact': typeof AppContactRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favourites': typeof AppFavouritesRoute
   '/design/$id': typeof DesignIdRoute
+  '/app/': typeof AppIndexRoute
+  '/app/design/$id': typeof AppDesignIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/app'
     | '/contact'
     | '/gallery'
     | '/sitemap.xml'
+    | '/app/about'
+    | '/app/contact'
+    | '/app/explore'
+    | '/app/favourites'
     | '/design/$id'
+    | '/app/'
+    | '/app/design/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/gallery' | '/sitemap.xml' | '/design/$id'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/about'
     | '/contact'
     | '/gallery'
     | '/sitemap.xml'
+    | '/app/about'
+    | '/app/contact'
+    | '/app/explore'
+    | '/app/favourites'
     | '/design/$id'
+    | '/app'
+    | '/app/design/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/app'
+    | '/contact'
+    | '/gallery'
+    | '/sitemap.xml'
+    | '/app/about'
+    | '/app/contact'
+    | '/app/explore'
+    | '/app/favourites'
+    | '/design/$id'
+    | '/app/'
+    | '/app/design/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AppRoute: typeof AppRouteWithChildren
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -125,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -139,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/design/$id': {
       id: '/design/$id'
       path: '/design/$id'
@@ -146,12 +249,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/favourites': {
+      id: '/app/favourites'
+      path: '/favourites'
+      fullPath: '/app/favourites'
+      preLoaderRoute: typeof AppFavouritesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/explore': {
+      id: '/app/explore'
+      path: '/explore'
+      fullPath: '/app/explore'
+      preLoaderRoute: typeof AppExploreRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/contact': {
+      id: '/app/contact'
+      path: '/contact'
+      fullPath: '/app/contact'
+      preLoaderRoute: typeof AppContactRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/about': {
+      id: '/app/about'
+      path: '/about'
+      fullPath: '/app/about'
+      preLoaderRoute: typeof AppAboutRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/design/$id': {
+      id: '/app/design/$id'
+      path: '/design/$id'
+      fullPath: '/app/design/$id'
+      preLoaderRoute: typeof AppDesignIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
+
+interface AppRouteChildren {
+  AppAboutRoute: typeof AppAboutRoute
+  AppContactRoute: typeof AppContactRoute
+  AppExploreRoute: typeof AppExploreRoute
+  AppFavouritesRoute: typeof AppFavouritesRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppDesignIdRoute: typeof AppDesignIdRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAboutRoute: AppAboutRoute,
+  AppContactRoute: AppContactRoute,
+  AppExploreRoute: AppExploreRoute,
+  AppFavouritesRoute: AppFavouritesRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppDesignIdRoute: AppDesignIdRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AppRoute: AppRouteWithChildren,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

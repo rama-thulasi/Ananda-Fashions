@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ananda Fashions</string>
+    <string name="title_activity_main">Ananda Fashions</string>
+    <string name="package_name">com.anandafashions.app</string>
+    <string name="custom_url_scheme">com.anandafashions.app</string>
+</resources>

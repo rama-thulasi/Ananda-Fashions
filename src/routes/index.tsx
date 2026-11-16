@@ -7,6 +7,8 @@ import {
   BadgeIndianRupee,
   ShieldCheck,
   ArrowRight,
+  Smartphone,
+  Download,
 } from "lucide-react";
 import { SITE, whatsappLink, GENERAL_ENQUIRY } from "@/data/site";
 import { categories } from "@/data/categories";
@@ -232,6 +234,60 @@ function HomePage() {
           >
             <WhatsAppIcon className="h-5 w-5" /> Chat on WhatsApp
           </a>
+        </div>
+      </section>
+
+      {/* DOWNLOAD THE APP SECTION */}
+      <section className="border-t border-border bg-gradient-to-b from-card to-secondary/60 py-20 md:py-24">
+        <div className="container-px">
+          <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-gold/30 bg-background shadow-soft lg:flex">
+            <div className="flex-1 p-8 sm:p-12 text-center flex flex-col items-center">
+              <span className="eyebrow text-gold">MOBILE EXPERIENCE</span>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Ananda Fashions on Your Android Device
+              </h2>
+              <div className="my-4 gold-rule mx-auto" />
+              <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
+                Browse our curated catalogue of bespoke bridal blouses, aari embroidery, half sarees, and festive frocks directly on your phone. Save your favourite designs offline to show our master tailors during your consultation.
+              </p>
+
+              <div className="mt-8 flex justify-center w-full">
+                <a
+                  href="/downloads/ananda-fashions.apk"
+                  download="ananda-fashions.apk"
+                  className={cls(
+                    btn.base,
+                    btn.primary,
+                    "gap-3 px-8 py-3.5 text-sm font-semibold shadow-luxury"
+                  )}
+                >
+                  <Download className="h-4 w-4 text-gold" />
+                  <span>Download the App (.APK)</span>
+                </a>
+              </div>
+
+              <p className="mt-4 text-center text-xs text-muted-foreground">
+                Compatible with Android 8.0 and above · Direct secure installation (No Play Store required)
+              </p>
+            </div>
+
+            <div className="hidden items-center justify-center bg-gradient-to-br from-[#50050F] to-[#6D071A] p-12 text-center text-white lg:flex lg:w-72">
+              <div className="flex flex-col items-center">
+                <div className="grid h-20 w-20 place-items-center rounded-2xl bg-white/10 p-2 shadow-inner ring-1 ring-gold/40 backdrop-blur-sm">
+                  <Smartphone className="h-10 w-10 text-gold" />
+                </div>
+                <h3 className="mt-4 font-display text-2xl font-semibold">
+                  Ananda App
+                </h3>
+                <p className="mt-1 text-xs text-gold-soft">
+                  Tailoring & Bridal Wear
+                </p>
+                <span className="mt-4 inline-block rounded-full bg-gold/20 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-gold-soft">
+                  v1.0 Android APK
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>

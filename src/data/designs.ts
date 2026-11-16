@@ -23,17 +23,27 @@ const BLOUSE_18 = "/images/blouse/Blouse_18.png";
 const BLOUSE_19 = "/images/blouse/Blouse_19.png";
 const BLOUSE_20 = "/images/blouse/Blouse_20.png";
 const BLOUSE_21 = "/images/blouse/Blouse_21.png";
+const BLOUSE_22 = "/images/blouse/Blouse_22.png";
+const BLOUSE_23 = "/images/blouse/Blouse_23.png";
+const BLOUSE_24 = "/images/blouse/Blouse_24.png";
+const BLOUSE_25 = "/images/blouse/Blouse_25.png";
+const BLOUSE_26 = "/images/blouse/Blouse_26.png";
+const BLOUSE_27 = "/images/blouse/Blouse_27.png";
 
 const FROCK_1 = "/images/frock/Frock_1.png";
 const FROCK_2 = "/images/frock/Frock_2.png";
 const FROCK_3 = "/images/frock/Frock_3.png";
 const FROCK_4 = "/images/frock/Frock_4.png";
+const FROCK_5 = "/images/frock/Frock_5.png";
+const FROCK_6 = "/images/frock/Frock_6.png";
 
 const HAND_1 = "/images/hand-design/Hand_1.png";
 const HAND_2 = "/images/hand-design/Hand_2.png";
 const HAND_3 = "/images/hand-design/Hand_3.png";
 const HAND_4 = "/images/hand-design/Hand_4.png";
 const HAND_5 = "/images/hand-design/Hand_5.png";
+const HAND_6 = "/images/hand-design/Hand_6.png";
+const HAND_7 = "/images/hand-design/Hand_7.png";
 
 const HALF_SAREE_1 = "/images/half-saree/Half_Saree_1.png";
 const HALF_SAREE_2 = "/images/half-saree/Half_Saree_2.png";
@@ -258,6 +268,28 @@ export const designs: Design[] = [
     images: [FROCK_4],
     description:
       "A soft cream frock with coral rose prints, matching sleeve accents, and a graceful gathered flare for elegant festive wear.",
+  },
+  {
+    id: "FR005",
+    code: "FR005",
+    category: "Frock",
+    categoryLabel: CATEGORY_LABELS.Frock,
+    title: "Olive Gold Brocade Frock",
+    image: FROCK_5,
+    images: [FROCK_5],
+    description:
+      "An exquisite olive gold brocade silk frock featuring a sweetheart golden zari yoke, fitted bodice, and a full pleated flare with a rich magenta temple border.",
+  },
+  {
+    id: "FR006",
+    code: "FR006",
+    category: "Frock",
+    categoryLabel: CATEGORY_LABELS.Frock,
+    title: "Sunshine Yellow Traditional Frock",
+    image: FROCK_6,
+    images: [FROCK_6],
+    description:
+      "A radiant yellow traditional silk frock styled with a geometric maroon zari neckline patch, defined waistband, and a full pleated skirt with broad festive borders.",
   },
   {
     id: "AB001",
@@ -506,6 +538,72 @@ export const designs: Design[] = [
       "A magenta and navy designer blouse with a shaped back panel, stone accents, and tie-back strings for standout occasion styling.",
   },
   {
+    id: "DB020",
+    code: "DB020",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Pleated Rust Panel Designer Blouse",
+    image: BLOUSE_22,
+    images: [BLOUSE_22],
+    description:
+      "A charcoal grey silk designer blouse featuring curved gold brocade side panels and a center rust-orange pleated inset with gold bead accents and tie-back detailing.",
+  },
+  {
+    id: "DB021",
+    code: "DB021",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Orange Petal Motif Designer Blouse",
+    image: BLOUSE_23,
+    images: [BLOUSE_23, HAND_7],
+    description:
+      "A rich bronze striped designer blouse styled with a square back neck, delicate scalloped gold lace border, and a statement orange petal motif with pearl accents.",
+  },
+  {
+    id: "DB022",
+    code: "DB022",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Lotus Cutwork Designer Blouse",
+    image: BLOUSE_24,
+    images: [BLOUSE_24],
+    description:
+      "A coral pink checked silk designer blouse with a deep square back, framed by dual gold lace borders and an intricate handcrafted lotus motif with embroidered detailing.",
+  },
+  {
+    id: "DB023",
+    code: "DB023",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Lattice Bow Designer Blouse",
+    image: BLOUSE_25,
+    images: [BLOUSE_25],
+    description:
+      "A turquoise blue designer blouse featuring an asymmetrical curved back panel styled with purple criss-cross bow lattice work and pearl embellishments.",
+  },
+  {
+    id: "DB024",
+    code: "DB024",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Wine Honeycomb Pleat Designer Blouse",
+    image: BLOUSE_26,
+    images: [BLOUSE_26],
+    description:
+      "A deep wine silk designer blouse crafted with a square back neck, ornate gold lace border, and an intricate lower panel of folded honeycomb pleats accented with pearls.",
+  },
+  {
+    id: "DB025",
+    code: "DB025",
+    category: "DesignerBlouse",
+    categoryLabel: CATEGORY_LABELS.DesignerBlouse,
+    title: "Geometric Fold Designer Blouse",
+    image: BLOUSE_27,
+    images: [BLOUSE_27],
+    description:
+      "A royal purple brocade designer blouse showcasing an asymmetric V-back neck with gold lace trim, sculpted triangle fabric folds, and pearl bead accents.",
+  },
+  {
     id: "HD001",
     code: "HD001",
     category: "HandDesign",
@@ -561,6 +659,28 @@ export const designs: Design[] = [
     images: [HAND_5],
     description:
       "A pastel hand design blouse featuring gathered mint sleeves, a soft collar neckline, and clean boutique finishing for elegant blouse styling.",
+  },
+  {
+    id: "HD006",
+    code: "HD006",
+    category: "HandDesign",
+    categoryLabel: CATEGORY_LABELS.HandDesign,
+    title: "Pleated Puff Potli Hand Design",
+    image: HAND_6,
+    images: [HAND_6],
+    description:
+      "A statement peacock blue blouse sleeve featuring shoulder gathered puff pleats, a wide gold zari cuff, and an elegant vertical row of fabric potli buttons.",
+  },
+  {
+    id: "HD007",
+    code: "HD007",
+    category: "HandDesign",
+    categoryLabel: CATEGORY_LABELS.HandDesign,
+    title: "Orange Petal Cutwork Hand Design",
+    image: HAND_7,
+    images: [HAND_7, BLOUSE_23],
+    description:
+      "A handcrafted bronze striped blouse sleeve featuring an orange three-petal cutwork applique outlined in gold lace, fine thread embroidery, and pearl detailing.",
   },
 ];
 

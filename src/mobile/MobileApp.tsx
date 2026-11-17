@@ -137,6 +137,34 @@ export function MobileApp() {
   };
 
   const goBack = () => {
+    // 1. If currently on design details screen, restore the design's category
+    if (screen === "details") {
+      const design = selectedDesignId ? getDesignById(selectedDesignId) : null;
+      if (design && design.category) {
+        setActiveCategory(design.category);
+      }
+      if (history.length > 1) {
+        const newHistory = [...history];
+        newHistory.pop();
+        const prevScreen = newHistory[newHistory.length - 1] || "explore";
+        setHistory(newHistory);
+        setScreen(prevScreen);
+      } else {
+        setScreen("explore");
+        setHistory(["home", "explore"]);
+      }
+      scrollToTop();
+      return;
+    }
+
+    // 2. If on explore and filtered to a specific category, back arrow goes back to 'All' category
+    if (screen === "explore" && activeCategory !== "All") {
+      setActiveCategory("All");
+      scrollToTop();
+      return;
+    }
+
+    // 3. Standard screen back navigation
     if (history.length > 1) {
       const newHistory = [...history];
       newHistory.pop(); // remove current

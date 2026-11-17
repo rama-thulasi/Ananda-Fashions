@@ -28,6 +28,7 @@ export function AppDesignCard({
       <Link
         to="/app/design/$id"
         params={{ id: design.id }}
+        search={{ fromCat: design.category }}
         className="block"
       >
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">

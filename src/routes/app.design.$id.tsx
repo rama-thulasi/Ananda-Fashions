@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute, Link, useParams, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, Heart } from "lucide-react";
 import { getDesignById, CATEGORY_LABELS } from "@/data/designs";
@@ -6,14 +7,48 @@ import { WhatsAppButton } from "@/components/mobile/WhatsAppButton";
 import { useFavourites } from "@/hooks/useFavourites";
 
 export const Route = createFileRoute("/app/design/$id")({
+  validateSearch: (search: Record<string, unknown>): { fromCat?: string } => {
+    return {
+      fromCat: search.fromCat as string | undefined,
+    };
+  },
   component: AppDesignDetailsScreen,
 });
 
 function AppDesignDetailsScreen() {
   const { id } = useParams({ from: "/app/design/$id" });
+  const search = Route.useSearch();
   const router = useRouter();
   const design = getDesignById(id);
   const { isFavourite, toggleFavourite } = useFavourites();
+
+  // Remember design category in session storage for back navigation
+  useEffect(() => {
+    if (design?.category) {
+      try {
+        sessionStorage.setItem("ananda_active_cat", design.category);
+      } catch {
+        // ignore
+      }
+    }
+  }, [design?.category]);
+
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+    } else {
+      const returnCat = search.fromCat || design?.category || "All";
+      try {
+        sessionStorage.setItem("ananda_active_cat", returnCat);
+      } catch {
+        // ignore
+      }
+      router.navigate({
+        to: "/app/explore",
+        search: returnCat === "All" ? {} : { cat: returnCat as any },
+      });
+    }
+  };
 
   if (!design) {
     return (
@@ -42,7 +77,7 @@ function AppDesignDetailsScreen() {
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-[#ECE5DA] bg-white px-4 pt-[env(safe-area-inset-top,0px)] shadow-sm">
         <button
           type="button"
-          onClick={() => router.history.back()}
+          onClick={handleBack}
           aria-label="Go back"
           className="flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted active:scale-90"
         >

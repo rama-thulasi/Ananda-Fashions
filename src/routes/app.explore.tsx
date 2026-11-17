@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppHeader } from "@/components/mobile/AppHeader";
 import {
   AppCategoryFilter,
@@ -11,7 +11,7 @@ import { designs } from "@/data/designs";
 export const Route = createFileRoute("/app/explore")({
   validateSearch: (search: Record<string, unknown>): { cat?: FilterKey } => {
     return {
-      cat: (search.cat as FilterKey) || "All",
+      cat: (search.cat as FilterKey) || undefined,
     };
   },
   component: AppExploreScreen,
@@ -19,14 +19,35 @@ export const Route = createFileRoute("/app/explore")({
 
 function AppExploreScreen() {
   const search = Route.useSearch();
-  const [activeCategory, setActiveCategory] = useState<FilterKey>(
-    search.cat || "All"
-  );
+  const navigate = useNavigate();
 
-  // Sync state if search.cat changes externally
+  const [activeCategory, setActiveCategory] = useState<FilterKey>(() => {
+    if (search.cat) return search.cat;
+    try {
+      const saved = sessionStorage.getItem("ananda_active_cat") as FilterKey | null;
+      if (saved) return saved;
+    } catch {}
+    return "All";
+  });
+
+  // Sync state if search.cat changes externally (back/forward navigation)
   useEffect(() => {
     if (search.cat) {
       setActiveCategory(search.cat);
+      try {
+        sessionStorage.setItem("ananda_active_cat", search.cat);
+      } catch {}
+    } else {
+      try {
+        const saved = sessionStorage.getItem("ananda_active_cat") as FilterKey | null;
+        if (saved && saved !== "All") {
+          setActiveCategory(saved);
+        } else {
+          setActiveCategory("All");
+        }
+      } catch {
+        setActiveCategory("All");
+      }
     }
   }, [search.cat]);
 
@@ -69,7 +90,26 @@ function AppExploreScreen() {
 
   const handleCategoryChange = (cat: FilterKey) => {
     setActiveCategory(cat);
+    try {
+      sessionStorage.setItem("ananda_active_cat", cat);
+    } catch {
+      // ignore
+    }
+    navigate({
+      to: "/app/explore",
+      search: cat === "All" ? {} : { cat },
+    });
     scrollToTop();
+  };
+
+  const handleExploreBack = () => {
+    if (activeCategory !== "All") {
+      handleCategoryChange("All");
+    } else if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+    } else {
+      navigate({ to: "/app" });
+    }
   };
 
   const filteredDesigns =
@@ -80,7 +120,7 @@ function AppExploreScreen() {
   return (
     <div className="flex flex-col bg-background pb-12">
       {/* Header with Back Arrow */}
-      <AppHeader />
+      <AppHeader onBack={handleExploreBack} />
 
       {/* Title Header */}
       <div className="px-4 pt-5 pb-2">

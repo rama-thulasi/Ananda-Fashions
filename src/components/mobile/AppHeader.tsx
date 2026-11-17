@@ -68,12 +68,7 @@ export function AppHeader({ title, showBack = true, onBack }: AppHeaderProps) {
         aria-label="View Favourite Designs"
         className="relative flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:text-maroon active:scale-95"
       >
-        <Heart className="h-5 w-5 text-maroon" />
-        {count > 0 && (
-          <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-maroon text-[0.6rem] font-semibold text-white shadow-sm">
-            {count > 9 ? "9+" : count}
-          </span>
-        )}
+        <Heart className={`h-5 w-5 ${count > 0 ? "fill-maroon text-maroon" : "text-maroon"}`} />
       </Link>
     </header>
   );

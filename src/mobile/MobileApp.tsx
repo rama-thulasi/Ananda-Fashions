@@ -69,14 +69,26 @@ export function MobileApp() {
     }
   });
 
+  const [showExitToast, setShowExitToast] = useState(false);
+  const lastBackTimeRef = useRef<number>(0);
+  const exitToastTimerRef = useRef<any>(null);
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToTop = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      scrollRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      scrollRef.current.scrollTop = 0;
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
+
+  // Scroll to top whenever screen or activeCategory changes
+  useEffect(() => {
+    scrollToTop();
+  }, [screen, activeCategory]);
 
   // Save favourites
   const toggleFavourite = (id: string, e?: React.MouseEvent) => {
@@ -119,7 +131,7 @@ export function MobileApp() {
     }
   };
 
-  // Hardware Android back button
+  // Hardware Android back button with double-tap exit
   useEffect(() => {
     let handler: any;
     try {
@@ -127,7 +139,17 @@ export function MobileApp() {
         if (screen !== "home") {
           goBack();
         } else {
-          CapApp.exitApp();
+          const now = Date.now();
+          if (now - lastBackTimeRef.current < 2000) {
+            CapApp.exitApp();
+          } else {
+            lastBackTimeRef.current = now;
+            setShowExitToast(true);
+            if (exitToastTimerRef.current) clearTimeout(exitToastTimerRef.current);
+            exitToastTimerRef.current = setTimeout(() => {
+              setShowExitToast(false);
+            }, 2000);
+          }
         }
       });
     } catch {
@@ -136,6 +158,9 @@ export function MobileApp() {
     return () => {
       if (handler && typeof handler.remove === "function") {
         handler.remove();
+      }
+      if (exitToastTimerRef.current) {
+        clearTimeout(exitToastTimerRef.current);
       }
     };
   }, [screen, history]);
@@ -279,12 +304,7 @@ export function MobileApp() {
               aria-label="View Favourite Designs"
               className="relative flex h-10 w-10 items-center justify-center rounded-full text-foreground hover:text-maroon active:scale-95"
             >
-              <Heart className="h-5 w-5 text-maroon" />
-              {favourites.length > 0 && (
-                <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-maroon text-[0.6rem] font-semibold text-white shadow-sm">
-                  {favourites.length > 9 ? "9+" : favourites.length}
-                </span>
-              )}
+              <Heart className={`h-5 w-5 ${favourites.length > 0 ? "fill-maroon text-maroon" : "text-maroon"}`} />
             </button>
           </header>
         )}
@@ -1065,6 +1085,13 @@ export function MobileApp() {
               </button>
             </div>
           </nav>
+        )}
+
+        {/* Double-tap back button exit toast */}
+        {showExitToast && (
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none rounded-full bg-[#1F1F1F]/90 px-5 py-2.5 text-xs font-medium text-white shadow-2xl backdrop-blur-md transition-opacity">
+            Press back again to exit
+          </div>
         )}
       </div>
     </div>

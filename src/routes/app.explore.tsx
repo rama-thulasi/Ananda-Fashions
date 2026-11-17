@@ -34,10 +34,11 @@ function AppExploreScreen() {
   const scrollToTop = () => {
     const container = document.getElementById("app-scroll-container");
     if (container) {
-      container.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      container.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      container.scrollTop = 0;
     }
     if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
   };
 

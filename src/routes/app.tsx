@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { App as CapApp } from "@capacitor/app";
 import { BottomNavigation } from "@/components/mobile/BottomNavigation";
 import { SplashScreen } from "@/components/mobile/SplashScreen";
 
@@ -11,6 +12,10 @@ function AppLayout() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const search = useRouterState({ select: (s) => s.location.search });
+
+  const [showExitToast, setShowExitToast] = useState(false);
+  const lastBackTimeRef = useRef<number>(0);
+  const exitToastTimerRef = useRef<any>(null);
 
   const [showSplash, setShowSplash] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -26,11 +31,49 @@ function AppLayout() {
   useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      scrollContainerRef.current.scrollTop = 0;
     }
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
   }, [pathname, search]);
+
+  // Hardware Android back button with double-tap exit
+  useEffect(() => {
+    let handler: any;
+    try {
+      handler = CapApp.addListener("backButton", () => {
+        const isAppHome = pathname === "/app" || pathname === "/app/";
+        if (!isAppHome) {
+          if (typeof window !== "undefined") {
+            window.history.back();
+          }
+        } else {
+          const now = Date.now();
+          if (now - lastBackTimeRef.current < 2000) {
+            CapApp.exitApp();
+          } else {
+            lastBackTimeRef.current = now;
+            setShowExitToast(true);
+            if (exitToastTimerRef.current) clearTimeout(exitToastTimerRef.current);
+            exitToastTimerRef.current = setTimeout(() => {
+              setShowExitToast(false);
+            }, 2000);
+          }
+        }
+      });
+    } catch {
+      // not in capacitor
+    }
+    return () => {
+      if (handler && typeof handler.remove === "function") {
+        handler.remove();
+      }
+      if (exitToastTimerRef.current) {
+        clearTimeout(exitToastTimerRef.current);
+      }
+    };
+  }, [pathname]);
 
   const handleFinishSplash = () => {
     setShowSplash(false);
@@ -58,6 +101,13 @@ function AppLayout() {
         </main>
 
         <BottomNavigation />
+
+        {/* Double-tap back button exit toast */}
+        {showExitToast && (
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none rounded-full bg-[#1F1F1F]/90 px-5 py-2.5 text-xs font-medium text-white shadow-2xl backdrop-blur-md transition-opacity">
+            Press back again to exit
+          </div>
+        )}
       </div>
     </div>
   );

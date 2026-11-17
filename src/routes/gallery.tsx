@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { designs, type CategoryKey } from "@/data/designs";
 import { CategoryFilter } from "@/components/CategoryFilter";
@@ -45,6 +45,10 @@ export const Route = createFileRoute("/gallery")({
 function GalleryPage() {
   const { cat } = Route.useSearch();
   const [active, setActive] = useState<Filter>(cat ?? "All");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [active]);
 
   const filtered =
     active === "All" ? designs : designs.filter((d) => d.category === active);

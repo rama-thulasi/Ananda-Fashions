@@ -28,14 +28,28 @@ export function BottomNavigation() {
   }
 
   const handleNavClick = () => {
-    const container = document.getElementById("app-scroll-container");
-    if (container) {
-      container.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      container.scrollTop = 0;
-    }
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
+    const performScroll = () => {
+      const container = document.getElementById("app-scroll-container");
+      if (container) {
+        container.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        container.scrollTop = 0;
+      }
+      const main = document.querySelector("main");
+      if (main) {
+        main.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        main.scrollTop = 0;
+      }
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+      }
+    };
+
+    performScroll();
+    requestAnimationFrame(performScroll);
+    setTimeout(performScroll, 20);
+    setTimeout(performScroll, 80);
   };
 
   return (

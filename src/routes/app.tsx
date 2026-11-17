@@ -29,13 +29,32 @@ function AppLayout() {
 
   // Automatically scroll to the top of the screen on any navigation / query change
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      scrollContainerRef.current.scrollTop = 0;
-    }
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
+    const performScroll = () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        scrollContainerRef.current.scrollTop = 0;
+      }
+      const container = document.getElementById("app-scroll-container");
+      if (container) {
+        container.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        container.scrollTop = 0;
+      }
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+      }
+    };
+
+    performScroll();
+    const raf = requestAnimationFrame(performScroll);
+    const t1 = setTimeout(performScroll, 20);
+    const t2 = setTimeout(performScroll, 80);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [pathname, search]);
 
   // Hardware Android back button with double-tap exit
@@ -88,13 +107,14 @@ function AppLayout() {
     <div className="fixed inset-0 md:static md:min-h-screen bg-stone-900/10 md:py-6 flex justify-center items-center overflow-hidden">
       {/* Mobile viewport frame */}
       <div
-        id="app-scroll-container"
         className="w-full max-w-[440px] h-full md:h-[860px] md:max-h-[92vh] md:rounded-[36px] bg-white shadow-2xl relative flex flex-col overflow-hidden md:border md:border-[#ECE5DA]"
       >
         {showSplash && <SplashScreen onFinish={handleFinishSplash} />}
 
         <main
+          id="app-scroll-container"
           ref={scrollContainerRef}
+          style={{ overflowAnchor: "none" }}
           className="flex-1 overflow-y-auto overscroll-contain flex flex-col"
         >
           <Outlet />

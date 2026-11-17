@@ -76,18 +76,38 @@ export function MobileApp() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToTop = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      scrollRef.current.scrollTop = 0;
-    }
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
+    const performScroll = () => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        scrollRef.current.scrollTop = 0;
+      }
+      const container = document.getElementById("app-scroll-container");
+      if (container) {
+        container.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        container.scrollTop = 0;
+      }
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+      }
+    };
+
+    performScroll();
+    const raf = requestAnimationFrame(performScroll);
+    const t1 = setTimeout(performScroll, 20);
+    const t2 = setTimeout(performScroll, 80);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   };
 
   // Scroll to top whenever screen or activeCategory changes
   useEffect(() => {
-    scrollToTop();
+    const cleanup = scrollToTop();
+    return cleanup;
   }, [screen, activeCategory]);
 
   // Save favourites
@@ -311,7 +331,9 @@ export function MobileApp() {
 
         {/* 3. SCROLLABLE MIDDLE CONTENT AREA (The only section that scrolls) */}
         <div
+          id="app-scroll-container"
           ref={scrollRef}
+          style={{ overflowAnchor: "none" }}
           className="flex-1 overflow-y-auto overscroll-contain flex flex-col"
         >
           {/* SCREEN 2: HOME */}

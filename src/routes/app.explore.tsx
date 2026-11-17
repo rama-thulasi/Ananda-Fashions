@@ -32,15 +32,40 @@ function AppExploreScreen() {
 
   // Scroll to top helper
   const scrollToTop = () => {
-    const container = document.getElementById("app-scroll-container");
-    if (container) {
-      container.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      container.scrollTop = 0;
-    }
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
+    const performScroll = () => {
+      const container = document.getElementById("app-scroll-container");
+      if (container) {
+        container.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        container.scrollTop = 0;
+      }
+      const main = document.querySelector("main");
+      if (main) {
+        main.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        main.scrollTop = 0;
+      }
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+      }
+    };
+
+    performScroll();
+    const raf = requestAnimationFrame(performScroll);
+    const t1 = setTimeout(performScroll, 20);
+    const t2 = setTimeout(performScroll, 80);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   };
+
+  // Scroll to top whenever category changes
+  useEffect(() => {
+    const cleanup = scrollToTop();
+    return cleanup;
+  }, [activeCategory]);
 
   const handleCategoryChange = (cat: FilterKey) => {
     setActiveCategory(cat);

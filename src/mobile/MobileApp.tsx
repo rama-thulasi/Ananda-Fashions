@@ -362,6 +362,8 @@ export function MobileApp() {
                         <img
                           src={design.image}
                           alt={design.title}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <span className="absolute left-2.5 top-2.5 rounded-full bg-maroon px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-white shadow-md">
@@ -417,6 +419,8 @@ export function MobileApp() {
                         <img
                           src={design.image}
                           alt={design.title}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <button
@@ -511,6 +515,8 @@ export function MobileApp() {
                         <img
                           src={design.image}
                           alt={design.title}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <button
@@ -933,6 +939,8 @@ export function MobileApp() {
                           <img
                             src={design.image}
                             alt={design.title}
+                            loading="lazy"
+                            decoding="async"
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                           <button

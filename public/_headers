@@ -1,0 +1,7 @@
+# Aggressive caching for images and static assets
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/logo.png
+  Cache-Control: public, max-age=31536000, immutable

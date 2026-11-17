@@ -18,6 +18,7 @@ export function DesignCard({ design, priority }: DesignCardProps) {
           src={design.image}
           alt={`${design.title} — ${design.categoryLabel} (${design.code})`}
           loading={priority ? "eager" : "lazy"}
+          decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

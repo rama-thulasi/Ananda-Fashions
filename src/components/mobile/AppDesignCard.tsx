@@ -35,6 +35,7 @@ export function AppDesignCard({
             src={design.image}
             alt={`${design.title} — ${design.categoryLabel}`}
             loading={priority ? "eager" : "lazy"}
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
